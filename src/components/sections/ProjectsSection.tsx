@@ -59,7 +59,7 @@ const ProjectsSection = () => {
                     </ul>
                 </article>
             </ProjectItem>
-            <ProjectItem href={"#"} title="3D RPG top-down game" using={["Unity", "C#"]}>
+            <ProjectItem href={"#"} title="Recreate Yasuo from League of Legends" using={["Unity", "C#"]}>
                 <p>Recreate Yasuo from League of Legends and create an enemy bot.</p>
                 <ul className="list-disc list-inside px-2">
                     <li>Character's state machine</li>
