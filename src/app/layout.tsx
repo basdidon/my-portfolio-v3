@@ -20,38 +20,38 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-            <div className="min-h-dvh bg-zinc-800">
-                <nav className="bg-zinc-900 text-white px-1 py-2 flex flex-row items-center">
-                    <div className="items-center flex flex-row divide-x-2">
-                        <NavItem href="/#">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                className="size-7 inline-block"
+                <div className="min-h-dvh bg-zinc-800">
+                    <nav className="bg-zinc-900 text-white px-1 py-2 flex flex-row items-center">
+                        <div className="items-center flex flex-row divide-x-2">
+                            <NavItem href="/#">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    className="size-7 inline-block"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </NavItem>
+                            <NavItem href="/#skills">Skills</NavItem>
+                            <NavItem href="/#projects">Projects</NavItem>
+                            <NavItem href="/#">About Me</NavItem>
+                        </div>
+                        <div className="flex flex-row-reverse ms-auto me-2">
+                            <Link
+                                href="#"
+                                className="px-2 py-1 font-bold text-center border-2 rounded-lg hover:bg-gray-300 hover:text-black"
                             >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </NavItem>
-                        <NavItem href="/#skills">Skills</NavItem>
-                        <NavItem href="/#projects">Projects</NavItem>
-                        <NavItem href="/#">About Me</NavItem>
-                    </div>
-                    <div className="flex flex-row-reverse ms-auto me-2">
-                        <Link
-                            href="#"
-                            className="px-2 py-1 font-bold text-center border-2 rounded-lg hover:bg-gray-300 hover:text-black"
-                        >
-                            My Resume
-                        </Link>
-                    </div>
-                </nav>
-                {children}
-            </div>
+                                My Resume
+                            </Link>
+                        </div>
+                    </nav>
+                    {children}
+                </div>
             </body>
         </html>
     );
