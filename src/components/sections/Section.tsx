@@ -10,7 +10,7 @@ const Section = ({ id, title, children }: SectionProps) => {
     return (
         <section
             id={id}
-            className="text-white w-dvh grow px-16 py-4 items-center odd:bg-zinc-700 even:bg-zinc-800"
+            className="text-white w-dvh grow px-16 py-4 items-center odd:bg-zinc-700 even:bg-zinc-800 sm:px-0 xl:px-16"
         >
             {title && (
                 <div className="border-b-2 py-3 font-bold">

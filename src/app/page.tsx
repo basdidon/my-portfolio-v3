@@ -21,6 +21,7 @@ const Home = () => {
     return (
         <>
             <div id="content" className="min-h-dvh flex flex-col">
+                <div className="bg-black sm:bg-red-500 md:bg-blue-500 lg:bg-yellow-500 xl:bg-blue-200 2xl:bg-white">shhh</div>
                 <Section>
                     <div className="grid grid-cols-3 py-5">
                         <div className="size-full">
