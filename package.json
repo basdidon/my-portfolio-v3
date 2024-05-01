@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
+    "firebase": "^10.11.1",
     "next": "14.2.3",
     "prismjs": "^1.29.0",
     "react": "^18",

@@ -1,19 +1,21 @@
 import Link from "next/link";
 import zelda_thumbnail from "../assets/thumbnails/zelda.jpg";
 import Image from "next/image";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 interface ProjectItemProps {
     title: string;
     href: string;
+    thumbnail?: string | StaticImport;
     using?: string[];
     children?: React.ReactNode;
 }
 
-const ProjectItem = ({ title, href, using, children }: ProjectItemProps) => {
+const ProjectItem = ({ title, href, thumbnail, using, children }: ProjectItemProps) => {
     return (
         <>
             <div className="bg-slate-800 w-full h-60 grid grid-cols-3 rounded-xl place-items-stretch">
-                <Image className="h-60 rounded-s-xl object-fill" src={zelda_thumbnail} alt="" />
+                <Image className="h-60 rounded-s-xl object-fill" src={thumbnail ?? zelda_thumbnail} alt="" />
                 <div className="col-span-2 py-3 px-5">
                     <Link href={href}>
                         <p className="text-3xl">{title}</p>

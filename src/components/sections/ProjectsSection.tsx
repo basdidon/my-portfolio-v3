@@ -1,12 +1,18 @@
 import React from "react";
 import ProjectItem from "../ProjectItem";
 
+import FlowgraphThumbnail from "../../assets/thumbnails/flowgraph_thumbnail.png";
+import ZapcafeThumpnail from "../../assets/thumbnails/zapcafe_thumpnail.png";
+import BoardgameThumpnail from "../../assets/thumbnails/boardgame_thumpnail.png";
+import TheMazeThumpnail from "../../assets/thumbnails/themaze_thumpnail.png";
+
 const ProjectsSection = () => {
     return (
         <>
             <ProjectItem
                 href="projects/flowgraph"
                 title="Flow Graph"
+                thumbnail={FlowgraphThumbnail}
                 using={["Unity", "C#"]}
             >
                 <p>
@@ -23,21 +29,14 @@ const ProjectsSection = () => {
                     <li>Design an interface that makes it easy to create custom nodes.</li>
                 </ul>
             </ProjectItem>
-
-            <ProjectItem href="projects/boardgame" title="Boardgame" using={["Unity", "C#"]}>
-                <p>create board game that player can use a card to cast abilities</p>
-                <ul className="list-disc list-inside px-2">
-                    <li>Utilizing Depth-First Search to predict player moves.</li>
-                    <li>Implementing a drag & drop system for playing cards.</li>
-                    <li>Utilizing DoTween to create animations. Managing input control</li>
-                    <li>through a state machine.</li>
-                </ul>
-            </ProjectItem>
-            <ProjectItem href={"projects/aa"} title="Mobile Tycoon Game" using={["Unity", "C#"]}>
+            <ProjectItem
+                href={"projects/zapcafe"}
+                title="Zap Cafe"
+                thumbnail={ZapcafeThumpnail}
+                using={["Unity", "C#"]}
+            >
                 <article>
-                    <p>
-                        Tycoon game with a cafe theme that allows players to build their own cafe.
-                    </p>
+                    <p>Idle game with a cafe theme that allows players to build their own cafe.</p>
                     <ul className="list-disc list-inside px-2">
                         <li>
                             Recipe system: Each menu item has different ingredients and methods for
@@ -53,20 +52,39 @@ const ProjectsSection = () => {
                         </li>
                         <li>Task Management: Manages and assigns tasks to workers.</li>
                         <li>
-                            Level system: Whenever a player completes a client's order, they gain
+                            Level system: Whenever a player completes a client&apos;s order, they gain
                             experience points (EXP). Upon leveling up, new features unlock.
                         </li>
                     </ul>
                 </article>
             </ProjectItem>
-            <ProjectItem href={"#"} title="Recreate Yasuo from League of Legends" using={["Unity", "C#"]}>
-                <p>Recreate Yasuo from League of Legends and create an enemy bot.</p>
+            <ProjectItem
+                href="projects/boardgame"
+                title="Boardgame"
+                thumbnail={BoardgameThumpnail}
+                using={["Unity", "C#"]}
+            >
+                <p>a board game that player can use a card to cast abilities</p>
                 <ul className="list-disc list-inside px-2">
-                    <li>Character's state machine</li>
-                    <li>Queued command</li>
-                    <li>Enemy's cone detection</li>
-                    <li>Combo system</li>
-                    <li>Timed buff system</li>
+                    <li>Utilizing Depth-First Search to predict player moves.</li>
+                    <li>Implementing a drag & drop system for playing cards.</li>
+                    <li>Utilizing DoTween to create animations. Managing input control</li>
+                    <li>through a state machine.</li>
+                </ul>
+            </ProjectItem>
+
+            <ProjectItem
+                href={"projects/themaze"}
+                title="The Maze"
+                thumbnail={TheMazeThumpnail}
+                using={["Unity", "C#"]}
+            >
+                <p>a maze solving game.</p>
+                <ul className="list-disc list-inside px-2">
+                    <li>Generate maze with Randomized depth-first search.</li>
+                    <li>Increase complexity with section and floor system</li>
+                    <li>Implements lighting to create dark maze</li>
+                    <li>Create Custom Editor to gennerate exactly tile match with cell data</li>
                 </ul>
             </ProjectItem>
         </>

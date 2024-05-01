@@ -14,7 +14,6 @@ import BlenderIcon from "@/assets/blender_icon.png";
 import AsepriteIcon from "@/assets/aseprite_icon.png";
 import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 
-
 const Home = () => {
     const githubUrl = "https://github.com/basdidon";
     const facebookPageUrl = "https://www.facebook.com/profile.php?id=100093078866767";
@@ -23,21 +22,23 @@ const Home = () => {
         <>
             <div id="content" className="min-h-dvh flex flex-col">
                 <Section>
-                    <div className='grid grid-cols-3 py-5'>
+                    <div className="grid grid-cols-3 py-5">
                         <div className="size-full">
                             <div className="bg-white size-56 rounded-full mx-auto"></div>
                         </div>
                         <div className="col-span-2">
-                            <p className="text-5xl font-bold">Hi, I'm Bas.</p>
+                            <p className="text-5xl font-bold">Hi, I&apos;m Bas.</p>
                             <p className="text-2xl">Unity Game Developer</p>
                             <article>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                pulvinar tortor nisl, at blandit odio iaculis ut. Nam condimentum
-                                arcu libero. Donec nec orci non libero pulvinar sodales sit amet ac
-                                magna. Pellentesque aliquet tellus et eros consectetur, et commodo
-                                lorem iaculis. Vestibulum euismod turpis quam, quis venenatis ligula
-                                sagittis sed. Etiam iaculis at augue vitae eleifend. Etiam malesuada
-                                tempor turpis.
+                                a game development enthusiast with a passion for creating immersive
+                                experiences. While I don&apos;t have professional experience yet, I&apos;ve
+                                dedicated myself to honing my skills in game development using Unity
+                                for the past 2 years. My expertise includes working with Unity&apos;s
+                                powerful tools such as ScriptableObject, CustomEditor, UiToolkit,
+                                and InputAction, allowing me to craft engaging gameplay mechanics
+                                and user interfaces. I&apos;m excited about the opportunity to leverage
+                                my skills and contribute to innovative projects in the game
+                                development industry.
                             </article>
                             <div className="flex my-4 text-lg font-bold">
                                 <Link
@@ -118,7 +119,6 @@ const Home = () => {
                 <Section id="projects" title="Projects">
                     <ProjectsSection />
                 </Section>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/pNHHiqdOAKs?si=UCXHMN5kgra6NzqW" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
         </>
     );
