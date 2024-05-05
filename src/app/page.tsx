@@ -101,8 +101,8 @@ const Home = () => {
                 </Section>
                 <Section title="Skills">
                     {/* add skill content below*/}
-                    <div className="p-8 my-2 space-y-8">
-                        <div className="flex flex-row flex-wrap items-center justify-center gap-x-10 gap-y-5">
+                    <div className="p-2 space-y-10">
+                        <div className="flex flex-row flex-wrap items-start justify-center gap-x-3 gap-y-3">
                             <SkillItem name="C#" src={CShapeIcon} />
                             <SkillItem name="Python" src={PythonIcon} />
                             <SkillItem name="JavaScript" src={JavaScriptIcon} />
