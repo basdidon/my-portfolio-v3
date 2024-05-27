@@ -13,14 +13,14 @@ const Section = ({ id, title, children }: SectionProps) => {
             className="text-white w-dvh grow py-4 items-center odd:bg-zinc-700 even:bg-zinc-800 px-2 sm:px-4 md:px-8 xl:px-16"
         >
             {title && (
-                <div className="border-b-2 py-3 font-bold">
-                    <p className="text-5xl ps-5">
+                <div className="border-b-2 py-3 font-bold mb-2">
+                    <p className="text-4xl md:text-5xl ps-5">
                         <span className="text-blue-500">My</span> {title}
                     </p>
                 </div>
             )}
 
-            <div className="my-5 space-y-5">{children}</div>
+            <div>{children}</div>
         </section>
     );
 };

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import SkillItem from "@/components/SkillItem";
 import ProjectsSection from "@/components/sections/ProjectsSection";
@@ -14,6 +15,8 @@ import BlenderIcon from "@/assets/blender_icon.png";
 import AsepriteIcon from "@/assets/aseprite_icon.png";
 import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 
+import Profile from "@/app/profile.jpg";
+
 const Home = () => {
     const githubUrl = "https://github.com/basdidon";
     const facebookPageUrl = "https://www.facebook.com/profile.php?id=100093078866767";
@@ -21,26 +24,39 @@ const Home = () => {
     return (
         <>
             <div id="content" className="min-h-dvh flex flex-col">
-                <div className="bg-black sm:bg-red-500 md:bg-blue-500 lg:bg-yellow-500 xl:bg-blue-200 2xl:bg-white">shhh</div>
                 <Section>
-                    <div className="grid grid-cols-3 py-5">
-                        <div className="size-full">
-                            <div className="bg-white size-56 rounded-full mx-auto"></div>
-                        </div>
+                    <div className="grid grid-cols-3 space-y-3 gap-x-8 place-items-start items-center">
+                        <Image
+                            src={Profile}
+                            alt="profile"
+                            className="
+                            size-28
+                            sm:size-32 
+                            md:size-48 md:row-span-2
+                            lg:size-56 
+                            xl:size-64 
+                            rounded-full mx-auto
+                            object-cover
+                            "
+                        />
                         <div className="col-span-2">
-                            <p className="text-5xl font-bold">Hi, I&apos;m Bas.</p>
-                            <p className="text-2xl">Unity Game Developer</p>
-                            <article>
-                                a game development enthusiast with a passion for creating immersive
-                                experiences. While I don&apos;t have professional experience yet, I&apos;ve
-                                dedicated myself to honing my skills in game development using Unity
-                                for the past 2 years. My expertise includes working with Unity&apos;s
-                                powerful tools such as ScriptableObject, CustomEditor, UiToolkit,
-                                and InputAction, allowing me to craft engaging gameplay mechanics
-                                and user interfaces. I&apos;m excited about the opportunity to leverage
-                                my skills and contribute to innovative projects in the game
-                                development industry.
-                            </article>
+                            <p className="text-3xl md:text-5xl font-bold">Hi, I&apos;m Bas.</p>
+                            <p className="text-lg md:text-xl line-clamp-1 overflow-visible">
+                                Unity Game Developer
+                            </p>
+                        </div>
+                        <div className="col-span-3 md:col-start-2 md:col-span-2">
+                            <p className="text-xs md:text-sm">
+                                &emsp;&emsp; A game development enthusiast with a passion for
+                                creating immersive experiences. While I don&apos;t have professional
+                                experience yet, I&apos;ve dedicated myself to honing my skills in
+                                game development using Unity for the past 2 years. My expertise
+                                includes working with Unity&apos;s powerful tools such as
+                                ScriptableObject, CustomEditor, UiToolkit, and InputAction, allowing
+                                me to craft engaging gameplay mechanics and user interfaces.
+                                I&apos;m excited about the opportunity to leverage my skills and
+                                contribute to innovative projects in the game development industry.
+                            </p>
                             <div className="flex my-4 text-lg font-bold">
                                 <Link
                                     id="github"
@@ -102,14 +118,14 @@ const Home = () => {
                 <Section title="Skills">
                     {/* add skill content below*/}
                     <div className="p-2 space-y-10">
-                        <div className="flex flex-row flex-wrap items-start justify-center gap-x-3 gap-y-3">
+                        <div className="flex flex-row flex-wrap items-start justify-center gap-x-3 gap-y-3 xl:gap-6">
                             <SkillItem name="C#" src={CShapeIcon} />
                             <SkillItem name="Python" src={PythonIcon} />
                             <SkillItem name="JavaScript" src={JavaScriptIcon} />
                             <SkillItem name="React Js" src={ReactIcon} />
                             <SkillItem name="Typescript" src={TypeScriptIcon} />
                         </div>
-                        <div className="flex flex-row flex-wrap items-center justify-center gap-x-10 gap-y-5">
+                        <div className="flex flex-row flex-wrap items-center justify-center gap-x-10 gap-y-5 xl:gap-6">
                             <SkillItem name="Unity" src={UnityIcon} />
                             <SkillItem name="Blender" src={BlenderIcon} />
                             <SkillItem name="Aseprite" src={AsepriteIcon} />

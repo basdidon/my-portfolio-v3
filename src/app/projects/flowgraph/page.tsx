@@ -24,13 +24,12 @@ const FlowGraphPage = () => {
     }, []);
     return (
         <>
-            <div className="px-5 py-3 flex flex-col items-center text-white w-4/5 mx-auto gap-3">
+            <div className="px-2 xl:px-5 xl:py-3 flex flex-col items-center text-white md:w-4/5 mx-auto gap-y-3 text-sm lg:text-base">
                 <div className="text-4xl font-bold py-2 mb-3 border-b-2 w-full">
                     <h1>Flow Graph</h1>
                 </div>
                 <iframe
-                    width="560"
-                    height="315"
+                    className="w-96 h-64 sm:w-[560px] sm:h-[315px]"
                     src="https://www.youtube.com/embed/0DVR4JZOncA?si=1RB9-2KmMiX9f6Zm"
                     title="YouTube video player"
                     frameBorder="0"
@@ -50,13 +49,15 @@ const FlowGraphPage = () => {
                         </Link>
                     </p>
                 </div>
-                <div>
-                    &emsp;&emsp;a tool for store dialogues into Unity&apos;s ScriptableObject, and
-                    visualize it on Unity&apos;s GraphView, make them easier to read and edit, allow user
-                    to create custom Node and Port by script
-                </div>
                 <div className="w-full">
-                    <h3 className="text-2xl">Installation</h3>
+                    <p>
+                        &emsp;&emsp;a tool for store dialogues into Unity&apos;s ScriptableObject,
+                        and visualize it on Unity&apos;s GraphView, make them easier to read and
+                        edit, allow user to create custom Node and Port by script
+                    </p>
+                </div>
+                <div className="w-full space-y-2 mt-2">
+                    <h3 className="text-lg md:text-2xl">Installation</h3>
                     <ul className="list-disc list-inside">
                         <li>
                             In UnityEditor, open{" "}
@@ -72,8 +73,8 @@ const FlowGraphPage = () => {
                         <li>enter TextField with this git URL, then press add button</li>
                     </ul>
                 </div>
-                <div className="w-full space-y-3">
-                    <h3 className="text-2xl">Create Custom Node</h3>
+                <div className="w-full space-y-2 mt-2">
+                    <h3 className="text-lg md:text-2xl">Create Custom Node</h3>
                     <p>
                         &emsp;&emsp;First create class that Extends BaseNode and Defined{" "}
                         <code>
@@ -102,8 +103,8 @@ const FlowGraphPage = () => {
                         to tell FlowGraph this is a input port.
                     </p>
                     <p>
-                        &emsp;&emsp;Declare another port with same type but name it as 	&quot;Output&quot; and
-                        define Attrbute{" "}
+                        &emsp;&emsp;Declare another port with same type but name it as
+                        &quot;Output&quot; and define Attrbute{" "}
                         <code>
                             &#91;<span className="text-lime-300">Output</span>&#93;
                         </code>{" "}
@@ -143,11 +144,11 @@ const FlowGraphPage = () => {
                     </p>
                     <CSharpCodeBlock codeString={code_4} />
                     <p>
-                        &emsp;&emsp;We can&apos;t read a value from MoneyToGain because we never set a
-                        value to it. Let&apos;s imagine that when we read data from this port, we need to
-                        find the port that connects to it. Then we read data from that port and
-                        return it. Otherwise, if it doesn&apos;t connect to any other port, it should
-                        return the default value. But don&apos;t worry, we have the method
+                        &emsp;&emsp;We can&apos;t read a value from MoneyToGain because we never set
+                        a value to it. Let&apos;s imagine that when we read data from this port, we
+                        need to find the port that connects to it. Then we read data from that port
+                        and return it. Otherwise, if it doesn&apos;t connect to any other port, it
+                        should return the default value. But don&apos;t worry, we have the method
                         <code className="px-3">
                             <span className="text-lime-300">GetInputValue</span>
                             (portName,defaultValue)
@@ -165,8 +166,8 @@ const FlowGraphPage = () => {
                         <code>
                             &#91;<span className="text-lime-300">Output</span>&#93;
                         </code>{" "}
-                        , After that we need to set backingField&apos;s value to default port value by
-                        replace default value in
+                        , After that we need to set backingField&apos;s value to default port value
+                        by replace default value in
                         <code className="px-3">
                             <span className="text-lime-300">GetInputValue</span>
                             (portName,defaultValue)
@@ -179,7 +180,8 @@ const FlowGraphPage = () => {
                         header. by create new class extend <code>NodeView</code> and define{" "}
                         <code>
                             &#91;<span className="text-lime-300">CustomNodeView</span>&#93;
-                        </code> and override both color like following code.
+                        </code>{" "}
+                        and override both color like following code.
                     </p>
                     <CSharpCodeBlock codeString={code_style} />
                     <Image src={CommpletedNodeWithStyle} alt="" className="mx-auto" />
@@ -317,4 +319,4 @@ public class PlayerGainMoneyNodeView : NodeView
     public override Color? TitleBackgroundColor => new Color32(64, 128, 64, 255);
     public override Color? TitleTextColor => new Color(.8f,.8f,.8f);
 }
-`
+`;
