@@ -141,10 +141,9 @@ const ProjectsSection = () => {
                             come to a stop, the game reads the final positions of the reels.
                         </li>{" "}
                         <li>
-                            <span className="font-bold">Reward System: </span>  The
-                            game checks the results against a payTable. If the results match
-                            any of the combinations in the payTable, the player receives a reward.
-                            spinning.
+                            <span className="font-bold">Reward System: </span> The game checks the
+                            results against a payTable. If the results match any of the combinations
+                            in the payTable, the player receives a reward. spinning.
                         </li>
                     </ul>
                 </ProjectItem>

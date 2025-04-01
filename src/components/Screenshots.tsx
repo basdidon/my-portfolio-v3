@@ -1,6 +1,3 @@
-import { promises as fs } from "fs";
-import { readdir } from "fs/promises";
-import path from "path";
 import React, { useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 

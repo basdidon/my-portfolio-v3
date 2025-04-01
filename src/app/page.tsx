@@ -16,6 +16,14 @@ import AsepriteIcon from "@/assets/aseprite_icon.png";
 import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 
 import Profile from "@/app/profile.jpg";
+import ProjectItemCard from "@/components/ProjectItemCard";
+
+import FlowgraphThumbnail from "../assets/thumbnails/flowgraph_thumbnail.png";
+import ZapcafeThumbnail from "../assets/thumbnails/zapcafe_thumbnail.png";
+import BoardgameThumbnail from "../assets/thumbnails/boardgame_thumbnail.png";
+import TheMazeThumbnail from "../assets/thumbnails/themaze_thumbnail.png";
+import WordleThumbnail from "../app/projects/wordle/(screenshots)/wordle-screenshot-6.png";
+import SlotMachineThumbnail from "../assets/thumbnails/slot-machine-thumbnail.png";
 
 const Home = () => {
     const githubUrl = "https://github.com/basdidon";
@@ -133,8 +141,105 @@ const Home = () => {
                         </div>
                     </div>
                 </Section>
+                {/*
                 <Section id="projects" title="Projects">
                     <ProjectsSection />
+                </Section>
+                */}
+                <Section id="projects" title="Projects">
+                    <div className="grid grid-cols-1 gap-y-8 xl:grid-cols-3 xl:gap-x-4">
+                        <ProjectItemCard
+                            title="Banking API"
+                            href="https://github.com/basdidon/EventSourcing"
+                            using={[
+                                { name: "C#" },
+                                { name: "ASP.NET" },
+                                { name: "EF Core" },
+                                { name: "MartenDb" },
+                                { name: "FastEndpoints", href: "https://fast-endpoints.com/" },
+                                { name: "Docker" },
+                                { name: "ASP.NET Core Identity" },
+                            ]}
+                        >
+                            <p>
+                                A simple banking API following the PEPR pattern, using event
+                                sourcing as the source of truth. It features role- and claims-based
+                                authentication for secure access control and includes integration
+                                tests to ensure reliability.
+                            </p>
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/wordle"
+                            title="Wordle"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={WordleThumbnail}
+                        >
+                            <p>
+                                Create a Wordle clone where the player guesses a five-letter word
+                                within six attempts. The game provides hints based on the accuracy
+                                of the guessed letters
+                            </p>
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/flowgraph"
+                            title="Flowgraph"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={FlowgraphThumbnail}
+                        >
+                            <p>
+                                Store dialogues in ScriptableObjects and visualize them in a graph
+                                view to make them easy to read and edit.
+                            </p>
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/zapcafe"
+                            title="Zap cafe"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={ZapcafeThumbnail}
+                        >
+                            <p>
+                                Idle moblie game with a cafe theme that allows players to build
+                                their own cafe.
+                            </p>
+                            <p className="text-lg text-yellow-300">Highlight Features:</p>
+                            <ul className="list-disc list-inside px-2">
+                                <li>Recipe system</li>
+                                <li>Object Placement</li>
+                                <li>Task system</li>
+                            </ul>
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/boardgame"
+                            title="Boardgame"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={BoardgameThumbnail}
+                        >
+                            <p>a board game that player can use a card to cast abilities</p>
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/themaze"
+                            title="The maze"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={TheMazeThumbnail}
+                        >
+                            This game challenges players to navigate a maze that changes every time
+                            they play. The maze is split into different sections and floors, making
+                            it more difficult as they progress. To add to the challenge, the maze is
+                            dark, and players need light to see their way.
+                        </ProjectItemCard>
+                        <ProjectItemCard
+                            href="projects/slotmachine"
+                            title="Slotmachine"
+                            using={[{ name: "C#" }, { name: "Unity" }]}
+                            thumbnail={SlotMachineThumbnail}
+                        >
+                            <p>
+                                In this exciting slot machine game, players can test their luck and
+                                skill in a classic casino-style experience. The gameplay is simple
+                                and engaging
+                            </p>
+                        </ProjectItemCard>
+                    </div>
                 </Section>
             </div>
         </>
