@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 import Prism from "prismjs";
@@ -17,6 +16,7 @@ import CommpletedNodeNoStyle from "./(img)/completed_node_no_style.png";
 import CommpletedNodeWithStyle from "./(img)/completed_node_with_style.png";
 
 import CSharpCodeBlock from "@/components/CSharpCodeBlock";
+import ProjectPage from "@/components/ProjectPage";
 
 const FlowGraphPage = () => {
     useEffect(() => {
@@ -24,31 +24,11 @@ const FlowGraphPage = () => {
     }, []);
     return (
         <>
-            <div className="px-2 xl:px-5 xl:py-3 flex flex-col items-center text-white md:w-4/5 mx-auto gap-y-3 text-sm lg:text-base">
-                <div className="text-4xl font-bold py-2 mb-3 border-b-2 w-full">
-                    <h1>Flow Graph</h1>
-                </div>
-                <iframe
-                    className="w-96 h-64 sm:w-[560px] sm:h-[315px]"
-                    src="https://www.youtube.com/embed/0DVR4JZOncA?si=1RB9-2KmMiX9f6Zm"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                ></iframe>
-                <div className="my-3">
-                    <p>
-                        Github URL :{" "}
-                        <Link
-                            className="text-blue-500 underline"
-                            href={"https://github.com/basdidon/H8-FlowGraph"}
-                            target="_blank"
-                        >
-                            github.com/basdidon/H8-FlowGraph
-                        </Link>
-                    </p>
-                </div>
+            <ProjectPage
+                title="Flow Graph"
+                githubUrl="https://github.com/basdidon/H8-FlowGraph"
+                videoUrl="https://www.youtube.com/embed/0DVR4JZOncA?si=1RB9-2KmMiX9f6Zm"
+            >
                 <div className="w-full">
                     <p>
                         &emsp;&emsp;a tool for store dialogues into Unity&apos;s ScriptableObject,
@@ -186,7 +166,7 @@ const FlowGraphPage = () => {
                     <CSharpCodeBlock codeString={code_style} />
                     <Image src={CommpletedNodeWithStyle} alt="" className="mx-auto" />
                 </div>
-            </div>
+            </ProjectPage>
         </>
     );
 };

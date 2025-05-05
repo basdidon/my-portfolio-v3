@@ -1,3 +1,4 @@
+import ProjectPage from "@/components/ProjectPage";
 import screenshot_1 from "./(screenshots)/wordle-screenshot-1.png";
 import screenshot_2 from "./(screenshots)/wordle-screenshot-2.png";
 import screenshot_3 from "./(screenshots)/wordle-screenshot-3.png";
@@ -13,19 +14,11 @@ const WordlePage = () => {
     const screenshotHeight = 126; //180
     return (
         <>
-            <div className="px-2 xl:px-5 xl:py-3 flex flex-col items-center text-white md:w-4/5 mx-auto gap-y-3 text-sm lg:text-base">
-                <div className="text-4xl font-bold py-2 mb-3 border-b-2 w-full">
-                    <h1>Wordle</h1>
-                </div>
-                <iframe
-                    className="w-96 h-64 sm:w-[560px] sm:h-[315px]"
-                    src="https://www.youtube.com/embed/v5ME3csv2ic?si=wB8cEGoI32Zgd1aj"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                ></iframe>
+            <ProjectPage
+                title="Wordle"
+                githubUrl="https://github.com/basdidon/debuz-wordle"
+                videoUrl="https://www.youtube.com/embed/v5ME3csv2ic?si=wB8cEGoI32Zgd1aj"
+            >
                 <div className="w-full text-base">
                     <p>
                         Create a Wordle clone where the player guesses a five-letter word within six
@@ -92,7 +85,7 @@ const WordlePage = () => {
                         screenshot_7,
                     ]}
                 />
-            </div>
+            </ProjectPage>
         </>
     );
 };

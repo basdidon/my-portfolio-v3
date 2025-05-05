@@ -150,7 +150,7 @@ const Home = () => {
                     <div className="grid grid-cols-1 gap-y-8 xl:grid-cols-3 xl:gap-x-4">
                         <ProjectItemCard
                             title="Banking API"
-                            href="https://github.com/basdidon/EventSourcing"
+                            href="projects/banking_api"
                             using={[
                                 { name: "C#" },
                                 { name: "ASP.NET" },
