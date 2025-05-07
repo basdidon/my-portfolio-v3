@@ -1,59 +1,347 @@
+import ApiDisplay, { ApiDisplayProps } from "@/components/ApiDisplay";
 import ProjectPage from "@/components/ProjectPage";
-import ResponsePill from "@/components/ResponsePill";
 
-type Behavior = {
-    role: string;
-    ProvidedOwnerId: boolean;
-    IsAllowed: boolean;
-    returnedItems: string;
-};
-const accountsApiBehavior: Behavior[] = [
+const apis: ApiDisplayProps[] = [
     {
-        role: "Customer",
-        ProvidedOwnerId: false,
-        IsAllowed: true,
-        returnedItems: "Items owned by the current user",
+        method: "GET",
+        path: "/accounts",
+        requestParameters: [
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "Represent user who send this request",
+            },
+            {
+                parameterName: "ownerId",
+                source: "QueryParameter",
+                type: "Guid",
+                required: false,
+                description: "For Teller and Admin to List accounts that owned by specific user",
+            },
+            {
+                parameterName: "page",
+                source: "QueryParameter",
+                type: "int",
+                required: false,
+                defaultValue: 1,
+                description: "Page number",
+            },
+            {
+                parameterName: "pageSize",
+                source: "QueryParameter",
+                type: "int",
+                required: false,
+                defaultValue: 20,
+                description: "Number of items per page",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Provided ownerId",
+                    response: "Forbidden",
+                    note: "customer cannot access other's accounts",
+                },
+                {
+                    condition: "Not provided ownerId",
+                    response: "Success",
+                    note: "Return items owned by the current user",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Provided ownerId",
+                    response: "Success",
+                    note: "Return accounts owned by that user",
+                },
+                {
+                    condition: "Not provided ownerId",
+                    response: "Success",
+                    note: "Return all accounts",
+                },
+            ],
+        },
     },
     {
-        role: "Customer",
-        ProvidedOwnerId: true,
-        IsAllowed: false,
-        returnedItems: "❌ Nothing / 403 Forbidden",
+        method: "POST",
+        path: "/accounts",
+        requestParameters: [
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "Represent user who send this request",
+            },
+            {
+                parameterName: "CustomerId",
+                source: "JsonBody",
+                type: "Guid",
+                required: true,
+                description: "OwnerId of this account",
+            },
+            {
+                parameterName: "initialBalance",
+                source: "JsonBody",
+                type: "decimal",
+                required: false,
+                defaultValue: 0,
+                description: "initial balance of this account",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "User is not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "CustomerId is not in customer role",
+                    response: "BadRequest",
+                    note: "Cannot create account for non customer role",
+                },
+                {
+                    condition: "InitialBalance less than 0",
+                    response: "BadRequest",
+                    note: "InitialBalance must greater than or equal to 0",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+        },
     },
     {
-        role: "Teller",
-        ProvidedOwnerId: false,
-        IsAllowed: true,
-        returnedItems: "All items",
+        method: "GET",
+        path: "/accounts/{accountId}",
+        requestParameters: [
+            {
+                parameterName: "accountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Account not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "Account not owned by current user",
+                    response: "Forbidden",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Account not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+        },
     },
     {
-        role: "Teller",
-        ProvidedOwnerId: true,
-        IsAllowed: true,
-        returnedItems: "Items owned by that user",
+        method: "POST",
+        path: "/accounts/{accountId}/deposit",
+        requestParameters: [
+            {
+                parameterName: "accountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "process account",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "user who send this request",
+            },
+            {
+                parameterName: "amount",
+                source: "JsonBody",
+                type: "decimal",
+                required: true,
+                description: "deposit amount",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Account not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "Amount is less than or equal 0",
+                    response: "BadRequest",
+                },
+                {
+                    condition: "Account is frozen",
+                    response: "Forbidden",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+        },
     },
     {
-        role: "Admin",
-        ProvidedOwnerId: false,
-        IsAllowed: true,
-        returnedItems: "All items",
+        method: "POST",
+        path: "/accounts/{accountId}/withdraw",
+        requestParameters: [
+            {
+                parameterName: "accountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "process account",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "user who send this request",
+            },
+            {
+                parameterName: "amount",
+                source: "JsonBody",
+                type: "decimal",
+                required: true,
+                description: "deposit amount",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Account not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "Amount is less than or equal 0",
+                    response: "BadRequest",
+                },
+                {
+                    condition: "Account is frozen",
+                    response: "Forbidden",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+        },
     },
     {
-        role: "Admin",
-        ProvidedOwnerId: true,
-        IsAllowed: true,
-        returnedItems: "Items owned by that user",
+        method: "POST",
+        path: "/withdrawal/{requestId}/confirm",
+        requestParameters: [
+            {
+                parameterName: "requestId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "withdraw request id",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "user who send this request",
+            },
+            {
+                parameterName: "otp",
+                source: "JsonBody",
+                type: "string",
+                required: true,
+                description: "one time password that sent to customer",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Withdraw request not exists",
+                    response: "NotFound",
+                },
+                {
+                    condition: "Withdraw request is revocked",
+                    response: "Gone",
+                },
+                {
+                    condition: "Withdraw request is already process",
+                    response: "Conflict",
+                },
+                {
+                    condition: "Withdraw request has expired",
+                    response: "Gone",
+                },
+                {
+                    condition: "Retry attempts exceeded",
+                    response: "Forbidden",
+                },
+                {
+                    condition: "Provided mismatch OTP",
+                    response: "BadRequest",
+                },
+                {
+                    condition: "Account not found",
+                    response: "NoContent",
+                },
+                {
+                    condition: "Account is frozen",
+                    response: "Forbidden",
+                },
+                { condition: "Insufficient fund", response: "Forbidden" },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+        },
     },
 ];
 
 const BankingApiPage = () => {
-    // Group data by role
-    const grouped: Record<string, Behavior[]> = {};
-    accountsApiBehavior.forEach((entry) => {
-        if (!grouped[entry.role]) grouped[entry.role] = [];
-        grouped[entry.role].push(entry);
-    });
-
     return (
         <>
             <ProjectPage title="Banking API" githubUrl="https://github.com/basdidon/EventSourcing">
@@ -61,175 +349,9 @@ const BankingApiPage = () => {
                     &emsp;In this exciting slot machine game, players can test their luck and skill
                     in a classic casino-style experience. The gameplay is simple and engaging:
                 </p>
-                {/* List Bank Accounts */}
-                <h3 className="text-2xl  mt-12 mb-2">
-                    <span className="font-bold text-green-500">GET</span>&emsp;/accounts
-                </h3>
-                <div className="px-8">
-                    <h4 className="text-lg font-bold mt-4 mb-2">Request Parameters</h4>
-                    <table className="w-full text-left border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
-                        <thead className="bg-zinc-700">
-                            <tr>
-                                <th className="py-3 px-5">Parameter</th>
-                                <th className="py-3 px-2">Source</th>
-                                <th className="py-3 px-2 text-center">Type</th>
-                                <th className="py-3 px-2 text-center">Required</th>
-                                <th className="py-3 px-2 text-center">Default</th>
-                                <th className="py-3 px-2">Desciption</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                                <td className="py-3 px-5">UserId</td>
-                                <td className="py-3 px-2">Claims</td>
-                                <td className="py-3 px-2 text-center">Guid</td>
-                                <td className="py-3 px-2 text-center">Yes</td>
-                                <td className="py-3 px-2 text-center">-</td>
-                                <td className="py-3 px-2">Represent user who send this request</td>
-                            </tr>
-                            <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                                <td className="py-3 px-5">OwnerId</td>
-                                <td className="py-3 px-2">Query Param</td>
-                                <td className="py-3 px-2 text-center">Guid</td>
-                                <td className="py-3 px-2 text-center">no</td>
-                                <td className="py-3 px-2 text-center">-</td>
-                                <td className="py-3 px-2">
-                                    For Teller and Admin to List accounts that owned by specific
-                                    user
-                                </td>
-                            </tr>
-                            <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                                <td className="py-3 px-5">Page</td>
-                                <td className="py-3 px-2">Query Param</td>
-                                <td className="py-3 px-2 text-center">int</td>
-                                <td className="py-3 px-2 text-center">no</td>
-                                <td className="py-3 px-2 text-center">1</td>
-                                <td className="py-3 px-2">Page number</td>
-                            </tr>
-                            <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                                <td className="py-3 px-5">PageSize</td>
-                                <td className="py-3 px-2">Query Param</td>
-                                <td className="py-3 px-2 text-center">int</td>
-                                <td className="py-3 px-2 text-center">no</td>
-                                <td className="py-3 px-2 text-center">20</td>
-                                <td className="py-3 px-2">Number of items per page</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h4 className="text-lg font-bold mt-4 mb-2">API Behaviors</h4>
-                    <table className="w-full text-left border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
-                        <thead className="bg-zinc-700">
-                            <tr>
-                                <th className="py-3 px-2 text-center">Role</th>
-                                <th className="py-3 px-2">
-                                    Query Param
-                                    <span className="text-sm ms-2 px-2 py-1 rounded-md bg-gray-600">
-                                        ownerId
-                                    </span>
-                                </th>
-                                <th className="py-3 px-2 text-center">Allowed?</th>
-                                <th className="py-3 px-2">returnd items</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.entries(grouped).map(([role, rows]) =>
-                                rows.map((row, idx) => (
-                                    <tr
-                                        key={`${role}-${idx}`}
-                                        className="[&:not(:last-child)]:border-b border-gray-200"
-                                    >
-                                        {idx === 0 && (
-                                            <th
-                                                scope="row"
-                                                className=" py-4 px-2 text-center"
-                                                rowSpan={rows.length}
-                                            >
-                                                {role}
-                                            </th>
-                                        )}
-                                        <td className="py-4 px-2">
-                                            {row.ProvidedOwnerId ? "Provided" : "Not Provided"}
-                                        </td>
-                                        <td className="py-4 px-2 text-center">
-                                            {row.IsAllowed ? "✅" : "🚫"}
-                                        </td>
-                                        <td className="py-4 px-2">{row.returnedItems}</td>
-                                    </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* Get Bank Account By Id */}
-                <h3 className="text-lg  mt-8 mb-2">
-                    <span className="font-bold text-green-500">GET</span> /accounts/
-                    <span className="text-blue-500">{"{AccountId}"}</span>
-                </h3>
-                <table className="w-full mt-4 text-left border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
-                    <thead className="bg-zinc-700">
-                        <tr>
-                            <th className="py-3 px-2 text-center">Role</th>
-                            <th>Condition</th>
-                            <th className="py-3 px-2">Response</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <th scope="row" className="py-4 px-2 text-center" rowSpan={3}>
-                                Customer
-                            </th>
-                            <td>Account not exists</td>
-                            <td className="py-3 px-2">
-                                <ResponsePill value="NotFound" />
-                            </td>
-                        </tr>
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <td>Not belong to current user</td>
-                            <td className="py-3 px-2">
-                                <ResponsePill value="Forbidden" />
-                            </td>
-                        </tr>
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <td>Default</td>
-                            <td className="py-3 px-2 ">
-                                <ResponsePill value="Success" />
-                            </td>
-                        </tr>
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <th scope="row" className="py-4 px-2 text-center" rowSpan={2}>
-                                Teller
-                            </th>
-                            <td>Account not exists</td>
-                            <td className="py-3 px-2 text-red-400">
-                                <ResponsePill value="NotFound" />
-                            </td>
-                        </tr>
-
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <td>Default</td>
-                            <td className="py-3 px-2 text-green-400">
-                                <ResponsePill value="Success" />
-                            </td>
-                        </tr>
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <th scope="row" className="py-4 px-2 text-center" rowSpan={2}>
-                                Admin
-                            </th>
-                            <td>Account not exists</td>
-                            <td className="py-3 px-2 text-red-400">
-                                <ResponsePill value="NotFound" />
-                            </td>
-                        </tr>
-
-                        <tr className="[&:not(:last-child)]:border-b border-gray-200">
-                            <td>Default</td>
-                            <td className="py-3 px-2 text-green-400">
-                                <ResponsePill value="Success" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                {apis.map((x) => (
+                    <ApiDisplay {...x} />
+                ))}
             </ProjectPage>
         </>
     );

@@ -1,25 +1,13 @@
-const responseMap = {
-    Success: { isSuccess: true, code: 200 },
-    Created: { isSuccess: true, code: 201 },
-    Accepted: { isSuccess: true, code: 202 },
-    NoContent: { isSuccess: true, code: 204 },
-    BadRequest: { isSuccess: false, code: 400 },
-    Unauthorized: { isSuccess: false, code: 401 },
-    Forbidden: { isSuccess: false, code: 403 },
-    NotFound: { isSuccess: false, code: 404 },
-    Conflict: { isSuccess: false, code: 409 },
-};
+import { HttpResponse, responseMap } from "@/const/HttpResponses";
 
-interface ResponsePillPropss {
-    value: keyof typeof responseMap;
-}
-const ResponsePill = ({ value }: ResponsePillPropss) => {
-    const { isSuccess, code } = responseMap[value];
+interface ResponsePillPropss extends HttpResponse {}
+const ResponsePill = ({ reasonPhrase }: ResponsePillPropss) => {
+    const { isSuccess, statusCode } = responseMap[reasonPhrase];
     const bgColor = isSuccess ? "bg-green-500" : "bg-red-500";
 
     return (
         <span className={`px-3 py-1 rounded-full text-white ${bgColor}`}>
-            {code}&emsp;{value}
+            {statusCode}&emsp;{reasonPhrase}
         </span>
     );
 };
