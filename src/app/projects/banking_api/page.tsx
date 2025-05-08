@@ -1,10 +1,17 @@
+"use client";
+
 import ApiDisplay, { ApiDisplayProps } from "@/components/ApiDisplay";
 import ProjectPage from "@/components/ProjectPage";
 
-const apis: ApiDisplayProps[] = [
+type ApiDetails = ApiDisplayProps & {
+    description?: string;
+};
+
+const apis: ApiDetails[] = [
     {
         method: "GET",
         path: "/accounts",
+        description: "List accounts",
         requestParameters: [
             {
                 parameterName: "userId",
@@ -67,6 +74,7 @@ const apis: ApiDisplayProps[] = [
     {
         method: "POST",
         path: "/accounts",
+        description: "Create a new account",
         requestParameters: [
             {
                 parameterName: "userId",
@@ -123,6 +131,7 @@ const apis: ApiDisplayProps[] = [
     {
         method: "GET",
         path: "/accounts/{accountId}",
+        description: "Get account by ID",
         requestParameters: [
             {
                 parameterName: "accountId",
@@ -162,6 +171,7 @@ const apis: ApiDisplayProps[] = [
     {
         method: "POST",
         path: "/accounts/{accountId}/deposit",
+        description: "Deposit funds",
         requestParameters: [
             {
                 parameterName: "accountId",
@@ -215,6 +225,7 @@ const apis: ApiDisplayProps[] = [
     {
         method: "POST",
         path: "/accounts/{accountId}/withdraw",
+        description: "Initiate withdrawal (pending state)",
         requestParameters: [
             {
                 parameterName: "accountId",
@@ -235,7 +246,7 @@ const apis: ApiDisplayProps[] = [
                 source: "JsonBody",
                 type: "decimal",
                 required: true,
-                description: "deposit amount",
+                description: "withdraw amount",
             },
         ],
         roleBehaviors: {
@@ -268,6 +279,7 @@ const apis: ApiDisplayProps[] = [
     {
         method: "POST",
         path: "/withdrawal/{requestId}/confirm",
+        description: "Confirm withdrawal",
         requestParameters: [
             {
                 parameterName: "requestId",
@@ -324,8 +336,8 @@ const apis: ApiDisplayProps[] = [
                     response: "BadRequest",
                 },
                 {
-                    condition: "Account not found",
-                    response: "NoContent",
+                    condition: "Account was not found",
+                    response: "NotFound",
                 },
                 {
                     condition: "Account is frozen",
@@ -339,16 +351,232 @@ const apis: ApiDisplayProps[] = [
             ],
         },
     },
+    {
+        method: "POST",
+        path: "/accounts/{sourceAccountId}/transfer",
+        description: "Transfer funds",
+        requestParameters: [
+            {
+                parameterName: "sourceAccountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "The account from which funds will be transferred",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "The user initiating the transfer",
+            },
+            {
+                parameterName: "destinationAccountId",
+                source: "JsonBody",
+                type: "Guid",
+                required: true,
+                description: "The account receiving the funds",
+            },
+            {
+                parameterName: "amount",
+                source: "JsonBody",
+                type: "decimal",
+                required: true,
+                description: "The amount of money to transfer",
+            },
+        ],
+        roleBehaviors: {
+            Customer: [
+                {
+                    condition: "source account or destination account is notfound",
+                    response: "NotFound",
+                },
+                {
+                    condition: "source account not belong to current user",
+                    response: "Forbidden",
+                },
+                { condition: "Insufficient fund", response: "BadRequest" },
+                {
+                    condition: "source account or destination account is frozen",
+                    response: "Forbidden",
+                },
+                {
+                    condition: "Default",
+                    response: "Success",
+                },
+            ],
+            "Teller or Admin": [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+        },
+    },
+    {
+        method: "POST",
+        path: "/accounts/{accountId}/freeze",
+        description: "Freeze the account",
+        requestParameters: [
+            {
+                parameterName: "accountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "The account will be freeze",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "The user who send this request",
+            },
+        ],
+        roleBehaviors: {
+            "Customer or Teller": [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            Admin: [
+                {
+                    condition: "Account was not found",
+                    response: "NotFound",
+                },
+                {
+                    condition: "The account has already been frozen",
+                    response: "Conflict",
+                },
+                {
+                    condition: "Default",
+                    response: "NoContent",
+                },
+            ],
+        },
+    },
+    {
+        method: "POST",
+        path: "/accounts/{accountId}/unfreeze",
+        description: "Unfreeze the account",
+        requestParameters: [
+            {
+                parameterName: "accountId",
+                source: "RouteParameter",
+                type: "Guid",
+                required: true,
+                description: "The account will be unfreeze",
+            },
+            {
+                parameterName: "userId",
+                source: "Claims",
+                type: "Guid",
+                required: true,
+                description: "The user who send this request",
+            },
+        ],
+        roleBehaviors: {
+            "Customer or Teller": [
+                {
+                    condition: "Default",
+                    response: "Forbidden",
+                },
+            ],
+            Admin: [
+                {
+                    condition: "Account was not found",
+                    response: "NotFound",
+                },
+                {
+                    condition: "The account hasn't been frozen yet",
+                    response: "Conflict",
+                },
+                {
+                    condition: "Default",
+                    response: "NoContent",
+                },
+            ],
+        },
+    },
 ];
 
 const BankingApiPage = () => {
+    const scrollToSection = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    };
     return (
         <>
             <ProjectPage title="Banking API" githubUrl="https://github.com/basdidon/EventSourcing">
                 <p>
-                    &emsp;In this exciting slot machine game, players can test their luck and skill
-                    in a classic casino-style experience. The gameplay is simple and engaging:
+                    &emsp;This project is a clean, modular Banking API built with FastEndpoints,
+                    following the REPR pattern (Request, Endpoint, Response) — a modern, streamlined
+                    alternative to traditional MVC architecture. The API emphasizes clear separation
+                    of concerns and lightweight endpoint definition. It features role-based access
+                    control with three roles:
                 </p>
+                <ul className="list-disc list-inside my-2">
+                    <li>
+                        <span className="font-bold">Customer</span> – for account holders
+                    </li>
+                    <li>
+                        <span className="font-bold">Teller</span> – for handling transactions
+                    </li>
+                    <li>
+                        <span className="font-bold">Admin</span> – for managing accounts and
+                        system-level operations
+                    </li>
+                </ul>
+                <p>
+                    &emsp;The backend is powered by Event Sourcing, implemented with MartenDb,
+                    providing full traceability and consistency through immutable event logs.
+                </p>
+                <h2 className="text-2xl mt-8 font-bold">Endpoints :</h2>
+                <div className="px-4 overflow-x-auto w-full">
+                    <table className="table-auto w-full text-left mt-4 px-4 border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
+                        <thead className="bg-zinc-700">
+                            <tr>
+                                <th className="py-2 px-5">Method</th>
+                                <th className="py-2 px-5">Endpoint</th>
+                                <th className="py-2 px-5">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {apis.map((x) => {
+                                const methodTextColor =
+                                    x.method === "GET"
+                                        ? "text-green-400"
+                                        : x.method === "POST"
+                                        ? "text-yellow-400"
+                                        : "text-gray-400";
+                                return (
+                                    <tr
+                                        className="hover:bg-zinc-500  whitespace-nowrap"
+                                        onClick={() => scrollToSection(x.method + ":" + x.path)}
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <td className={`py-2 px-5 font-bold ${methodTextColor}`}>
+                                            {x.method}
+                                        </td>
+                                        <td className="py-2 px-5">
+                                            {x.path.split(/(\{[^}]+\})/g).map((segment, index) =>
+                                                segment.match(/^\{[^}]+\}$/) ? (
+                                                    <span key={index} className="text-blue-400">
+                                                        {segment}
+                                                    </span>
+                                                ) : (
+                                                    <span key={index}>{segment}</span>
+                                                )
+                                            )}
+                                        </td>
+                                        <td className="py-2 px-5">{x.description}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+
                 {apis.map((x) => (
                     <ApiDisplay {...x} />
                 ))}
