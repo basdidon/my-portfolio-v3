@@ -1,12 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import Image from "next/image";
 
-import Prism from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
-import "prismjs/components/prism-csharp";
-import "prismjs/plugins/line-numbers/prism-line-numbers.js";
-import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import Image from "next/image";
 
 import CreateNodeMenuPNG from "./(img)/create_node_menu.png";
 import NodeWithNoPort from "./(img)/node_with_no_port.png";
@@ -15,13 +9,10 @@ import NodeWithPortsPNG from "./(img)/node_with_ports.png";
 import CommpletedNodeNoStyle from "./(img)/completed_node_no_style.png";
 import CommpletedNodeWithStyle from "./(img)/completed_node_with_style.png";
 
-import CSharpCodeBlock from "@/components/CSharpCodeBlock";
 import ProjectPage from "@/components/ProjectPage";
+import PrismGist from "@/components/PrismGist";
 
 const FlowGraphPage = () => {
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
     return (
         <>
             <ProjectPage
@@ -53,7 +44,7 @@ const FlowGraphPage = () => {
                         <li>enter TextField with this git URL, then press add button</li>
                     </ul>
                 </div>
-                <div className="w-full space-y-2 mt-2">
+                <div className="w-full space-y-4 mt-2">
                     <h3 className="text-lg md:text-2xl">Create Custom Node</h3>
                     <p>
                         &emsp;&emsp;First create class that Extends BaseNode and Defined{" "}
@@ -61,11 +52,15 @@ const FlowGraphPage = () => {
                             [<span className="text-lime-300">CreateCustomNode</span>()]
                         </code>
                     </p>
-                    <CSharpCodeBlock codeString={code_1} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_01.cs"
+                    />
                     <p>
                         &emsp;&emsp;Now you can create node by open graphTree and right-click on
-                        empty space, then select{" "}
-                        <span className="font-bold">Player &gt; GainMoney</span>
+                        empty space, then select
+                        <span className="ms-1 font-bold">Player &gt; GainMoney</span>
                     </p>
                     <Image src={CreateNodeMenuPNG} alt={""} className="mx-auto" />
                     <p>
@@ -90,7 +85,11 @@ const FlowGraphPage = () => {
                         </code>{" "}
                         to tell FlowGraph this is a output port.
                     </p>
-                    <CSharpCodeBlock codeString={code_2} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_02.cs"
+                    />
                     <p>
                         &emsp;&emsp;Now if you go back to GraphTree, Graph will re-render and node
                         will be added by ports, like below.
@@ -104,7 +103,11 @@ const FlowGraphPage = () => {
                         &emsp;&emsp;Next step, Create port with type int name it as MoneyToGain like
                         following code.
                     </p>
-                    <CSharpCodeBlock codeString={code_3} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_03.cs"
+                    />
                     <Image src={NodeWithPortsPNG} alt={""} className="mx-auto" />
                     <p>
                         &emsp;&emsp;Node that have a{" "}
@@ -122,7 +125,11 @@ const FlowGraphPage = () => {
                         <span className="text-yellow-500">IExecutableNode </span>. And when
                         OnEnter() we increase Player&apos;s Money and Move To Next Node.
                     </p>
-                    <CSharpCodeBlock codeString={code_4} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_04.cs"
+                    />
                     <p>
                         &emsp;&emsp;We can&apos;t read a value from MoneyToGain because we never set
                         a value to it. Let&apos;s imagine that when we read data from this port, we
@@ -135,7 +142,11 @@ const FlowGraphPage = () => {
                         </code>
                         to do that for us. So we just apply this method to our code.
                     </p>
-                    <CSharpCodeBlock codeString={code_5} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_05.cs"
+                    />
                     <p>
                         &emsp;&emsp;we can create backingField by declaring a field with the same
                         type of port. And add name of that field to{" "}
@@ -153,7 +164,16 @@ const FlowGraphPage = () => {
                             (portName,defaultValue)
                         </code>
                     </p>
-                    <CSharpCodeBlock codeString={code_6} />
+                    <div className="flex justify-center">
+                        <div className="w-32 bg-red-500">I'm centered</div>
+                    </div>
+                    <div className="flex-1 justify-center">
+                        <PrismGist
+                            classname="md:w-4/5"
+                            codeLang="CSharp"
+                            gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_06.cs"
+                        />
+                    </div>
                     <Image src={CommpletedNodeNoStyle} alt="" className="mx-auto" />
                     <p>
                         &emsp;&emsp;Finally, You can changed background color and text color of the
@@ -163,7 +183,11 @@ const FlowGraphPage = () => {
                         </code>{" "}
                         and override both color like following code.
                     </p>
-                    <CSharpCodeBlock codeString={code_style} />
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_07_styling.cs"
+                    />
                     <Image src={CommpletedNodeWithStyle} alt="" className="mx-auto" />
                 </div>
             </ProjectPage>
@@ -172,131 +196,3 @@ const FlowGraphPage = () => {
 };
 
 export default FlowGraphPage;
-
-const code_1 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode
-{
-}`;
-const code_2 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode
-{
-    [Input]
-    public ExecutionFlow Input { get; }
-
-    [Output]
-    public ExecutionFlow Output { get; }
-}`;
-const code_3 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode
-{
-    [Input]
-    public ExecutionFlow Input { get; }
-
-    [Output]
-    public ExecutionFlow Output { get; }
-
-    [Input]
-    public int MoneyToGain { get; }
-}`;
-
-const code_4 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode, IExecutableNode
-{
-    [Input]
-    public ExecutionFlow Input { get; }
-
-    [Output]
-    public ExecutionFlow Output { get; }
-
-    [Input]
-    public int MoneyToGain {get;}
-
-    public void Action(GraphTreeController controller, IBaseAction action) { }
-
-    public void OnEnter(GraphTreeController controller)
-    {
-        // Call Method that increase money for Player
-        DialogueDatabase.Instance.Player.GainMoney(MoneyToGain);
-        // Move to Next Node
-        controller.ToNextExecutableNode(GetPortData(nameof(Output)), GraphTree);
-    }
-
-    public void OnExit(GraphTreeController controller) { }
-}`;
-const code_5 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode, IExecutableNode
-{
-    [Input]
-    public ExecutionFlow Input { get; }
-
-    [Output]
-    public ExecutionFlow Output { get; }
-
-    [Input]
-    public int MoneyToGain => GetInputValue(nameof(MoneyToGain), 0);
-
-    public void Action(GraphTreeController controller, IBaseAction action) { }
-
-    public void OnEnter(GraphTreeController controller)
-    {
-        DialogueDatabase.Instance.Player.GainMoney(MoneyToGain);
-        controller.ToNextExecutableNode(GetPortData(nameof(Output)), GraphTree);
-    }
-
-    public void OnExit(GraphTreeController controller) { }
-}`;
-const code_6 = `using UnityEngine;
-using H8.FlowGraph;
-using H8.FlowGraph.NodeTemplate;
-
-[CreateNodeMenu("Player/GainMoney")]
-public class PlayerGainMoneyNode : BaseNode, IExecutableNode
-{
-    [Input]
-    public ExecutionFlow Input { get; }
-
-    [Output]
-    public ExecutionFlow Output { get; }
-
-    public int moneyToGain; // add backingField
-    [Input(nameof(moneyToGain))] // add backingField&apos;s name to InputAttribute
-    public int MoneyToGain => GetInputValue(nameof(MoneyToGain), moneyToGain);  // set backingField as default value
-
-    public void Action(GraphTreeController controller, IBaseAction action) { }
-
-    public void OnEnter(GraphTreeController controller)
-    {
-        DialogueDatabase.Instance.Player.GainMoney(MoneyToGain);
-        controller.ToNextExecutableNode(GetPortData(nameof(Output)), GraphTree);
-    }
-
-    public void OnExit(GraphTreeController controller) { }
-}`;
-
-const code_style = `[CustomNodeView(typeof(PlayerGainMoneyNode))]
-public class PlayerGainMoneyNodeView : NodeView
-{
-    public override Color? TitleBackgroundColor => new Color32(64, 128, 64, 255);
-    public override Color? TitleTextColor => new Color(.8f,.8f,.8f);
-}
-`;

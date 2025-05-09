@@ -1,6 +1,7 @@
 "use client";
 
 import ApiDisplay, { ApiDisplayProps } from "@/components/ApiDisplay";
+import PrismGist from "@/components/PrismGist";
 import ProjectPage from "@/components/ProjectPage";
 
 type ApiDetails = ApiDisplayProps & {
@@ -531,9 +532,20 @@ const BankingApiPage = () => {
                     &emsp;The backend is powered by Event Sourcing, implemented with MartenDb,
                     providing full traceability and consistency through immutable event logs.
                 </p>
-                <h2 className="text-2xl mt-8 font-bold">Endpoints :</h2>
-                <div className="px-4 overflow-x-auto w-full">
-                    <table className="table-auto w-full text-left mt-4 px-4 border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
+                <h2 className="text-2xl mt-8 mb-2 font-bold">Event Projections :</h2>
+                <div className="md:px-2">
+                    <h3 className="text-xl mt-4 mb-2 font-bold">Bank Account Projection</h3>
+                    <div className="md:px-4">
+                        <PrismGist
+                            codeLang="CSharp"
+                            gistRawFileUrl="https://gist.githubusercontent.com/basdidon/69f8c2f00ff92a9a19f2892941db6174/raw/e63f8ba016410fc9adcb69a7e28aef216a346a11/BankAccountProjection.cs"
+                        />
+                    </div>
+                </div>
+
+                <h2 className="text-lg md:text-2xl mt-8 mb-2 font-bold">Endpoints :</h2>
+                <div className="md:px-4 overflow-x-auto scrollbar-hide w-full">
+                    <table className="table-auto w-full text-left text-sm md:text-base px-4 border-collapse border-spacing-x-4 bg-zinc-600 rounded-xl overflow-hidden">
                         <thead className="bg-zinc-700">
                             <tr>
                                 <th className="py-2 px-5">Method</th>
@@ -551,7 +563,8 @@ const BankingApiPage = () => {
                                         : "text-gray-400";
                                 return (
                                     <tr
-                                        className="hover:bg-zinc-500  whitespace-nowrap"
+                                        key={x.method + x.path}
+                                        className="hover:bg-zinc-500  whitespace-nowrap text-xs md:text-sm"
                                         onClick={() => scrollToSection(x.method + ":" + x.path)}
                                         style={{ cursor: "pointer" }}
                                     >
@@ -577,8 +590,8 @@ const BankingApiPage = () => {
                     </table>
                 </div>
 
-                {apis.map((x) => (
-                    <ApiDisplay {...x} />
+                {apis.map((x, idx) => (
+                    <ApiDisplay key={idx} {...x} />
                 ))}
             </ProjectPage>
         </>

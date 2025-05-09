@@ -51,7 +51,7 @@ const ProjectPage = ({ title, videoUrl, children, githubUrl }: ProjectPageProps)
                         allowFullScreen
                     ></iframe>
                 )}
-                <div className="w-full text-base">{children}</div>
+                <div className="w-full text-xs md:text-base">{children}</div>
             </div>
         </>
     );
