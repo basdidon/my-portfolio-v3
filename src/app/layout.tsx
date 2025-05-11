@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
 import NavItem from "@/components/NavItem";
 import Link from "next/link";
 
@@ -21,7 +20,7 @@ export default function RootLayout({
         "https://drive.google.com/file/d/12_FYs7mhFhbdzPujznaTK8d19qp5zo7o/view?usp=drive_link";
     return (
         <html lang="en">
-            <title>Pongsatorn's portfolio</title>
+            <title>Pongsatorn&apos;s portfolio</title>
             <body className={inter.className}>
                 <div className="min-h-dvh bg-zinc-800">
                     <nav className="bg-zinc-900 text-white px-1 py-2 flex flex-row items-center">
@@ -29,13 +28,6 @@ export default function RootLayout({
                             <NavItem href="/#">Me.</NavItem>
                             <NavItem href="/#skills">Skills</NavItem>
                             <NavItem href="/#projects">Projects</NavItem>
-                            {/*
-                            <NavItem href="/#">
-                                <div className="bg-black sm:bg-red-500 md:bg-blue-500 lg:bg-yellow-500 xl:bg-blue-200 2xl:bg-white">
-                                    shhh
-                                </div>
-                            </NavItem>
-    */}
                         </div>
                         <div className="flex flex-row-reverse ms-auto me-2">
                             <Link

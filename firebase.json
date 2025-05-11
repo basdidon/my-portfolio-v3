@@ -1,11 +1,8 @@
 {
-  "hosting": {
-    "public": "out",
-    "cleanUrls": true,
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }
+    "hosting": {
+        "site": "myportfolio-9562",
+        "public": "out",
+        "cleanUrls": true,
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    }
 }

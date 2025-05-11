@@ -164,9 +164,6 @@ const FlowGraphPage = () => {
                             (portName,defaultValue)
                         </code>
                     </p>
-                    <div className="flex justify-center">
-                        <div className="w-32 bg-red-500">I'm centered</div>
-                    </div>
                     <div className="flex-1 justify-center">
                         <PrismGist
                             classname="md:w-4/5"

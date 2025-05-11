@@ -22,16 +22,16 @@ const bulletClassname = "text-xs bg-blue-400 w-min h-min px-2 py-1 rounded-lg";
 const ProjectItemCard = ({ title, href, thumbnail, using, children }: ProjectItemProps) => {
     return (
         <>
-            <div>
-                <Image
-                    className="col-span-3 h-48 sm:h-56 rounded-xl  object-cover"
-                    src={thumbnail ?? zelda_thumbnail}
-                    alt=""
-                />
+            <div className=" p-2 rounded-xl hover:bg-zinc-600">
                 <Link href={href}>
+                    <Image
+                        className="col-span-3 h-48 sm:h-56 rounded-xl  object-cover"
+                        src={thumbnail ?? zelda_thumbnail}
+                        alt=""
+                    />
                     <h3 className="text-3xl mt-3">{title}</h3>
+                    {/* TAGS */}
                 </Link>
-                {/* TAGS */}
                 <div className="flex flex-wrap my-2 gap-x-1 gap-y-1 whitespace-nowrap">
                     {using?.map((item, idx) =>
                         item.href ? (
@@ -50,8 +50,7 @@ const ProjectItemCard = ({ title, href, thumbnail, using, children }: ProjectIte
                         )
                     )}
                 </div>
-                {/* Description */}
-                {children}
+                <Link href={href}>{children}</Link>
             </div>
         </>
     );

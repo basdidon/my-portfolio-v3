@@ -544,8 +544,8 @@ const BankingApiPage = () => {
                     </div>
                     <p>
                         &emsp;This file defines the read model for a bank account. The BankAccount
-                        class represents the current state of a user's bank account. Key properties
-                        include:
+                        class represents the current state of a user&apos;s bank account. Key
+                        properties include:
                     </p>
                     <ul className=" list-inside list-disc mt-2">
                         <li>
@@ -558,7 +558,8 @@ const BankingApiPage = () => {
                         </li>
                         <li>
                             <span className=" font-bold text-yellow-300">AccountNumber : </span>
-                            Human-readable identifier for the account (e.g., "123-456789-0").
+                            Human-readable identifier for the account (e.g.,
+                            &quot;123-456789-0&quot;).
                         </li>
                         <li>
                             <span className=" font-bold text-yellow-300">Balance : </span>
@@ -606,7 +607,7 @@ const BankingApiPage = () => {
                             <span className="bg-zinc-700 py-1 px-2 rounded-md m-1">
                                 AccountUnfrozen
                             </span>
-                            : Change the account's status.
+                            : Change the account&apos;s status.
                         </li>
                         <li>
                             <span className="bg-zinc-700 py-1 px-2 rounded-md m-1">
@@ -629,8 +630,8 @@ const BankingApiPage = () => {
                         />
                     </div>
                     <p>
-                        This class maps events to changes in the BankAccount state using Marten's
-                        SingleStreamProjection&lt;T&gt;
+                        This class maps events to changes in the BankAccount state using
+                        Marten&aspo;s SingleStreamProjection&lt;T&gt;
                     </p>
                 </div>
                 {/* Withdrawal */}

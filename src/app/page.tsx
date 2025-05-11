@@ -18,6 +18,7 @@ import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 import Profile from "@/app/profile.jpg";
 import ProjectItemCard from "@/components/ProjectItemCard";
 
+import BankingApiThumbnail from "../assets/thumbnails/Banking API Thumbnail_simple.png";
 import FlowgraphThumbnail from "../assets/thumbnails/flowgraph_thumbnail.png";
 import ZapcafeThumbnail from "../assets/thumbnails/zapcafe_thumbnail.png";
 import BoardgameThumbnail from "../assets/thumbnails/boardgame_thumbnail.png";
@@ -147,10 +148,11 @@ const Home = () => {
                 </Section>
                 */}
                 <Section id="projects" title="Projects">
-                    <div className="grid grid-cols-1 gap-y-8 xl:grid-cols-3 xl:gap-x-4">
+                    <div className="grid grid-cols-1 gap-y-4 xl:grid-cols-3 xl:gap-x-2">
                         <ProjectItemCard
                             title="Banking API"
                             href="projects/banking_api"
+                            thumbnail={BankingApiThumbnail}
                             using={[
                                 { name: "C#" },
                                 { name: "ASP.NET" },
