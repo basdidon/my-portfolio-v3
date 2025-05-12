@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 import SkillItem from "@/components/SkillItem";
-import ProjectsSection from "@/components/sections/ProjectsSection";
 import Section from "@/components/sections/Section";
 
 import CShapeIcon from "@/assets/c_sharp_icon.png";
