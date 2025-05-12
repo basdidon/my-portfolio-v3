@@ -120,7 +120,7 @@ const projectApiDetails: ApiDetails[] = [
                 },
                 {
                     condition: "Default",
-                    response: "Success",
+                    response: "Created",
                 },
             ],
         },
