@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.3.0",
     "firebase": "^10.11.1",
-    "next": "14.2.3",
+    "next": "^15.3.2",
     "prismjs": "^1.29.0",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-embed-gist": "^1.0.29",
+    "react-pdf": "^9.2.1",
     "sharp": "^0.33.3",
     "tailwind-scrollbar-hide": "^2.0.0"
   },

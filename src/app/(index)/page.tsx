@@ -14,16 +14,16 @@ import BlenderIcon from "@/assets/blender_icon.png";
 import AsepriteIcon from "@/assets/aseprite_icon.png";
 import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 
-import Profile from "@/app/profile.jpg";
+import Profile from "@/assets/profile.jpg";
 import ProjectItemCard from "@/components/ProjectItemCard";
 
-import BankingApiThumbnail from "../assets/thumbnails/Banking API Thumbnail_simple.png";
-import FlowgraphThumbnail from "../assets/thumbnails/flowgraph_thumbnail.png";
-import ZapcafeThumbnail from "../assets/thumbnails/zapcafe_thumbnail.png";
-import BoardgameThumbnail from "../assets/thumbnails/boardgame_thumbnail.png";
-import TheMazeThumbnail from "../assets/thumbnails/themaze_thumbnail.png";
-import WordleThumbnail from "../app/projects/wordle/(screenshots)/wordle-screenshot-6.png";
-import SlotMachineThumbnail from "../assets/thumbnails/slot-machine-thumbnail.png";
+import BankingApiThumbnail from "@/assets/thumbnails/Banking API Thumbnail_simple.png";
+import FlowgraphThumbnail from "@/assets/thumbnails/flowgraph_thumbnail.png";
+import ZapcafeThumbnail from "@/assets/thumbnails/zapcafe_thumbnail.png";
+import BoardgameThumbnail from "@/assets/thumbnails/boardgame_thumbnail.png";
+import TheMazeThumbnail from "@/assets/thumbnails/themaze_thumbnail.png";
+import WordleThumbnail from "@/app/projects/wordle/(screenshots)/wordle-screenshot-6.png";
+import SlotMachineThumbnail from "@/assets/thumbnails/slot-machine-thumbnail.png";
 
 const Home = () => {
     const githubUrl = "https://github.com/basdidon";
