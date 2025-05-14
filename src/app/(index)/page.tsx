@@ -248,3 +248,8 @@ const Home = () => {
 };
 
 export default Home;
+
+export const metadata = {
+    title: "Pongsatorn's portfolio",
+    description: "",
+};
