@@ -8,6 +8,8 @@ import screenshot_6 from "./(screenshots)/wordle-screenshot-6.png";
 import screenshot_7 from "./(screenshots)/wordle-screenshot-7.png";
 
 import Screenshots from "@/components/Screenshots";
+import PageSection from "@/components/PageSection";
+import PageSubSection from "@/components/PageSubSection";
 
 const WordlePage = () => {
     const screenshotWidth = 224; //320
@@ -40,10 +42,8 @@ const WordlePage = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="w-full space-y-2 mt-2">
-                    <h3 className="text-lg md:text-2xl">Features</h3>
-                    <ul>
-                        <li className="font-bold">2-Way Input :</li>
+                <PageSection title="Features">
+                    <PageSubSection title="2-Way Input">
                         <ul className="list-disc list-inside px-2">
                             <li>
                                 <span className="font-bold">Keyboard Input:</span> Allows players to
@@ -54,7 +54,8 @@ const WordlePage = () => {
                                 on-screen keyboard for input on touch devices.
                             </li>
                         </ul>
-                        <li className="font-bold">Animations :</li>
+                    </PageSubSection>
+                    <PageSubSection title="Animations">
                         <ul className="list-disc list-inside px-2">
                             <li>
                                 <span className="font-bold">Input Letter Animation:</span> Visual
@@ -70,8 +71,8 @@ const WordlePage = () => {
                                 indication when a guessed word is not accepted by the game.
                             </li>
                         </ul>
-                    </ul>
-                </div>
+                    </PageSubSection>
+                </PageSection>
                 <Screenshots
                     width={screenshotWidth}
                     height={screenshotHeight}

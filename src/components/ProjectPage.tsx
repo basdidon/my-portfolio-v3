@@ -13,7 +13,9 @@ const ProjectPage = ({ title, videoUrl, children, githubUrl }: ProjectPageProps)
         <>
             <div className="px-2 xl:px-5 xl:py-3 flex flex-col items-center text-white md:w-4/5 mx-auto gap-y-3 text-sm lg:text-base">
                 <div className="text-4xl font-bold py-2 mb-3 border-b-2 w-full flex justify-between items-center">
-                    <h1>{title}</h1>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
+                        {title}
+                    </h1>
                     {githubUrl && (
                         <div className="size-12 items-center flex flex-col rounded-md shadow-md shadow-zinc-950 hover:bg-zinc-600 place-items-center justify-items-center border-zinc-700 border">
                             <div className="m-auto">

@@ -17,6 +17,7 @@ import IllustratorIcon from "@/assets/adobe_Illustrator_icon.png";
 import Profile from "@/assets/profile.jpg";
 import ProjectItemCard from "@/components/ProjectItemCard";
 
+import CourseEnrollmentThumbnail from "@/assets/thumbnails/Course_Enrollment_API.png";
 import BankingApiThumbnail from "@/assets/thumbnails/Banking API Thumbnail_simple.png";
 import FlowgraphThumbnail from "@/assets/thumbnails/flowgraph_thumbnail.png";
 import ZapcafeThumbnail from "@/assets/thumbnails/zapcafe_thumbnail.png";
@@ -148,6 +149,26 @@ const Home = () => {
                 */}
                 <Section id="projects" title="Projects">
                     <div className="grid grid-cols-1 gap-y-4 xl:grid-cols-3 xl:gap-x-2">
+                        <ProjectItemCard
+                            title="Course Enrollment API"
+                            href="projects/course_enrollment_api"
+                            thumbnail={CourseEnrollmentThumbnail}
+                            using={[
+                                { name: "C#" },
+                                { name: "ASP.NET" },
+                                { name: "EF Core" },
+                                { name: "Docker" },
+                                { name: "MediatR" },
+                                { name: "ASP.NET Core Identity" },
+                            ]}
+                        >
+                            <p>
+                                A microservices-based Course Enrollment system with Identity and
+                                Course services, built using Clean Architecture. Supports JWT
+                                authentication, role-based access (Admin, Instructor, Student), and
+                                course management with enrollment handling via MediatR.
+                            </p>
+                        </ProjectItemCard>
                         <ProjectItemCard
                             title="Banking API"
                             href="projects/banking_api"

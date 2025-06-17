@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
+import PageSection from "./PageSection";
 
 interface ScreenshotProps {
-    width:number;
-    height:number;
-    images:StaticImageData[];
+    width: number;
+    height: number;
+    images: StaticImageData[];
 }
 
 // Function to import all images from the screenshots folder
@@ -12,17 +13,23 @@ interface ScreenshotProps {
 const importAll = (r) => r.keys().map(r);
 const images = importAll(require.context('./screenshots', false, /\.(png|jpe?g|svg)$/));*/
 
-const Screenshots = async ({ width,height,images }: ScreenshotProps) => {
+const Screenshots = async ({ width, height, images }: ScreenshotProps) => {
     return (
         <div className="w-full space-y-2 mt-2">
-            <h3 className="text-lg md:text-2xl">Screenshots :</h3>
-            <div className="flex flex-wrap gap-2 items-center justify-center">
-                {images.map((image) => (
-                    <>
-                        <Image width={width} height={height} src={image} alt={""} priority />
-                    </>
-                ))}
-            </div>
+            <PageSection title="Screenshots :">
+                <div className="flex flex-wrap gap-2 items-center justify-center">
+                    {images.map((image, idx) => (
+                        <Image
+                            key={idx}
+                            width={width}
+                            height={height}
+                            src={image}
+                            alt={""}
+                            priority
+                        />
+                    ))}
+                </div>
+            </PageSection>
         </div>
     );
 };
