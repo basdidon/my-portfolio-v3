@@ -25,7 +25,7 @@ export const ResumeDocument = ({ title }: { title?: string }) => {
                                         "Designed use cases including course creation, assignment, enrollment, and viewing of course details and participants.",
                                         "Enabled secure communication between services using JWT tokens for authentication and access validation.",
                                         "Applied consistent architectural practices across both services for maintainability and extensibility.",
-                                        "Used: C#, ASP.NET Core, EF Core, Clean Architecture, JWT, PostgreSQL, Docker",
+                                        "Used: C#, ASP.NET Core, EF Core, MediatR, Clean Architecture, JWT, PostgreSQL, Docker",
                                     ]}
                                 />
                             </View>
@@ -113,7 +113,7 @@ export const ResumeDocument = ({ title }: { title?: string }) => {
                                 <Text style={styles.sectionTitle}>Education Background</Text>
                                 <Text>Khon Kean University</Text>
                                 <Text>Bechelor of Science , Major in Computer Science</Text>
-                                <Text>2016 - 2020</Text>
+                                <Text>2016 - 2022</Text>
                             </View>
                         </View>
                     </View>
