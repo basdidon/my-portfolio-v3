@@ -15,32 +15,25 @@ const CourseEnrollmentProjectPage = () => {
                         architecture and follows the Clean Architecture principles across both
                         services:
                     </p>
-                    <ul className="list-disc list-inside my-2">
-                        <li>
-                            <span className="text-yellow-400 font-bold">Identity.Api :</span>
-                            &emsp;Handles user registration, login, logout, token refreshing, and
-                            user data retrieval using JWT. It supports three roles (Admin,
-                            Instructor, and Student), role-based access control. This service is
-                            designed to work seamlessly with other microservices by issuing and
-                            validating JWT tokens.
-                        </li>
-                        <li>
-                            <span className="text-yellow-400 font-bold"> Courses.Api :</span>
-                            &emsp;Manages all course-related operations, including creating,
-                            updating, deleting, and enrolling in courses. It validates tokens issued
-                            by Identity.Api and ensures proper access control based on user roles.
-                        </li>
-                    </ul>
-                    <p>
-                        &emsp;&emsp;Both services use MediatR for in-memory communication between
-                        the Presentation and Application layers, promoting loose coupling and
-                        maintainability. This project demonstrates a scalable, secure, and modular
-                        approach to building service-oriented applications. Both services use
-                        MediatR for in-memory communication between the Presentation and Application
-                        layers, promoting loose coupling and maintainability. This project
-                        demonstrates a scalable, secure, and modular approach to building
-                        service-oriented applications.
-                    </p>
+                    <PageSection title="Sub-Projects">
+                        <PageSubSection title="🔑 Identity.Api">
+                            <p>
+                                &emsp;&emsp;Handles user registration, login, logout, token
+                                refreshing, and user data retrieval using JWT. It supports three
+                                roles (Admin, Instructor, and Student), role-based access control.
+                                This service is designed to work with other microservices by issuing
+                                and validating JWT tokens.
+                            </p>
+                        </PageSubSection>
+                        <PageSubSection title="📚 Courses.Api">
+                            <p>
+                                &emsp;&emsp;Manages all course-related operations, including
+                                creating, updating, deleting, and enrolling in courses. It validates
+                                tokens issued by Identity.Api and ensures proper access control
+                                based on user roles.
+                            </p>
+                        </PageSubSection>
+                    </PageSection>
                     <PageSection title="🧑‍💻 User Use Cases">
                         <PageSubSection title="🌐 Anyone">
                             <ul className="list-disc list-inside ms-6">

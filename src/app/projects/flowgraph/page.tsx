@@ -11,6 +11,7 @@ import CommpletedNodeWithStyle from "./(img)/completed_node_with_style.png";
 
 import ProjectPage from "@/components/ProjectPage";
 import PrismGist from "@/components/PrismGist";
+import PageSection from "@/components/PageSection";
 
 const FlowGraphPage = () => {
     return (
@@ -27,8 +28,7 @@ const FlowGraphPage = () => {
                         edit, allow user to create custom Node and Port by script
                     </p>
                 </div>
-                <div className="w-full space-y-2 mt-2">
-                    <h3 className="text-lg md:text-2xl">Installation</h3>
+                <PageSection title="Installation">
                     <ul className="list-disc list-inside">
                         <li>
                             In UnityEditor, open{" "}
@@ -43,9 +43,8 @@ const FlowGraphPage = () => {
                         </li>
                         <li>enter TextField with this git URL, then press add button</li>
                     </ul>
-                </div>
-                <div className="w-full space-y-4 mt-2">
-                    <h3 className="text-lg md:text-2xl">Create Custom Node</h3>
+                </PageSection>
+                <PageSection title="Create Custom Node">
                     <p>
                         &emsp;&emsp;First create class that Extends BaseNode and Defined{" "}
                         <code>
@@ -164,13 +163,13 @@ const FlowGraphPage = () => {
                             (portName,defaultValue)
                         </code>
                     </p>
-                    <div className="flex-1 justify-center">
-                        <PrismGist
-                            classname="md:w-4/5"
-                            codeLang="CSharp"
-                            gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_06.cs"
-                        />
-                    </div>
+
+                    <PrismGist
+                        classname="w-full md:w-4/5 mx-auto rounded-lg"
+                        codeLang="CSharp"
+                        gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_06.cs"
+                    />
+
                     <Image src={CommpletedNodeNoStyle} alt="" className="mx-auto" />
                     <p>
                         &emsp;&emsp;Finally, You can changed background color and text color of the
@@ -186,7 +185,7 @@ const FlowGraphPage = () => {
                         gistRawFileUrl="https://gist.githubusercontent.com/basdidon/58f858dca0bb4bf1da3b7b1ddd1829c4/raw/3fb29acc6db52c7e2c59bf9123911dc0b7fae322/Flowgraph_example_07_styling.cs"
                     />
                     <Image src={CommpletedNodeWithStyle} alt="" className="mx-auto" />
-                </div>
+                </PageSection>
             </ProjectPage>
         </>
     );

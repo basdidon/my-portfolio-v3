@@ -1,85 +1,6 @@
 "use client";
 import { Document, Page, View, Text, StyleSheet, Image } from "@react-pdf/renderer";
-import profile from "@/assets/profile.jpg";
 import List from "../List";
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column",
-        gap: 4,
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-    },
-    header: {
-        backgroundColor: "#0096FF",
-        //height: 120,
-        gap: 4,
-        padding: 8,
-        marginVertical: 8,
-        color: "white",
-    },
-    DisplayText: {
-        fontSize: 32,
-        fontWeight: "bold",
-    },
-    SubDisplayText: {
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    nameContainer: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginLeft: "auto",
-        backgroundColor: "red",
-        width: "50%",
-        letterSpacing: 2,
-    },
-    profile: {
-        height: 164,
-        width: 164,
-        position: "absolute",
-        borderRadius: 120,
-        left: 48,
-        top: 24,
-    },
-    bodyContainer: {
-        flexDirection: "row",
-        gap: 4,
-        fontSize: 10,
-    },
-    leftContainer: {
-        flex: 2,
-        gap: 2,
-        //backgroundColor: "#ca5941",
-        paddingHorizontal: 2,
-    },
-    rightContainer: {
-        flex: 1,
-        paddingHorizontal: 2,
-        //backgroundColor: "cyan",
-        fontSize: 8,
-    },
-    sectionTitle: {
-        fontSize: 14,
-        fontWeight: "bold",
-    },
-    sectionContainer: {
-        padding: 4,
-        gap: 2,
-    },
-    textLabel: {
-        fontWeight: "semibold",
-    },
-    text: {
-        fontSize: 10,
-        paddingRight: 12,
-        wordBreak: "normal", // This ensures breaks only at spaces
-    },
-    textIndent: {
-        textIndent: "50%",
-    },
-});
 
 export const ResumeDocument = ({ title }: { title?: string }) => {
     return (
@@ -93,6 +14,21 @@ export const ResumeDocument = ({ title }: { title?: string }) => {
                     <View style={styles.bodyContainer}>
                         <View style={styles.leftContainer}>
                             <Text style={styles.sectionTitle}>Personal projects</Text>
+                            <View style={styles.sectionContainer}>
+                                <Text style={styles.textLabel}>Course enrollment API</Text>
+                                <List
+                                    bulletMarginRight={8}
+                                    listItems={[
+                                        "Built a modular Course Enrollment system using Clean Architecture and a microservices approach for separation of concerns and scalability.",
+                                        "Developed two core services: Identity.Api for authentication/authorization and Courses.Api for managing course-related operations.",
+                                        "Implemented role-based access control with three roles: Admin, Instructor, and Student, each with specific capabilities across services.",
+                                        "Designed use cases including course creation, assignment, enrollment, and viewing of course details and participants.",
+                                        "Enabled secure communication between services using JWT tokens for authentication and access validation.",
+                                        "Applied consistent architectural practices across both services for maintainability and extensibility.",
+                                        "Used: C#, ASP.NET Core, EF Core, Clean Architecture, JWT, PostgreSQL, Docker",
+                                    ]}
+                                />
+                            </View>
                             <View style={styles.sectionContainer}>
                                 <Text style={styles.textLabel}>Simple banking API</Text>
                                 <List
@@ -186,3 +122,81 @@ export const ResumeDocument = ({ title }: { title?: string }) => {
         </Document>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: "column",
+        gap: 4,
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+    },
+    header: {
+        backgroundColor: "#0096FF",
+        //height: 120,
+        gap: 4,
+        padding: 8,
+        marginVertical: 8,
+        color: "white",
+    },
+    DisplayText: {
+        fontSize: 32,
+        fontWeight: "bold",
+    },
+    SubDisplayText: {
+        fontSize: 24,
+        fontWeight: "bold",
+    },
+    nameContainer: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginLeft: "auto",
+        backgroundColor: "red",
+        width: "50%",
+        letterSpacing: 2,
+    },
+    profile: {
+        height: 164,
+        width: 164,
+        position: "absolute",
+        borderRadius: 120,
+        left: 48,
+        top: 24,
+    },
+    bodyContainer: {
+        flexDirection: "row",
+        gap: 4,
+        fontSize: 10,
+    },
+    leftContainer: {
+        flex: 2,
+        gap: 2,
+        //backgroundColor: "#ca5941",
+        paddingHorizontal: 2,
+    },
+    rightContainer: {
+        flex: 1,
+        paddingHorizontal: 2,
+        //backgroundColor: "cyan",
+        fontSize: 8,
+    },
+    sectionTitle: {
+        fontSize: 14,
+        fontWeight: "bold",
+    },
+    sectionContainer: {
+        padding: 4,
+        gap: 2,
+    },
+    textLabel: {
+        fontWeight: "semibold",
+    },
+    text: {
+        fontSize: 10,
+        paddingRight: 12,
+        wordBreak: "normal", // This ensures breaks only at spaces
+    },
+    textIndent: {
+        textIndent: "50%",
+    },
+});
