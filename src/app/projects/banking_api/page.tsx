@@ -61,8 +61,8 @@ const BankingApiPage = () => {
                         <h3 className="text-center text-gray-400 mb-2">BankAccount.cs</h3>
                         <p>
                             &emsp;This file defines the read model for a bank account. The
-                            BankAccount class represents the current state of a user's bank account.
-                            Key properties include:
+                            BankAccount class represents the current state of a user&apos;s bank
+                            account. Key properties include:
                         </p>
                         <ul className=" list-inside list-disc m-4">
                             <li>
@@ -153,7 +153,7 @@ const BankingApiPage = () => {
                         </div>
                         <p>
                             This class maps events to changes in the BankAccount state using
-                            Marten's SingleStreamProjection&lt;T&gt;
+                            Marten&apos;s SingleStreamProjection&lt;T&gt;
                         </p>
                     </PageSubSection>
                 </PageSection>
